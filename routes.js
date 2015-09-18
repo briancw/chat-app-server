@@ -9,6 +9,9 @@ module.exports = function(app, passport) {
         res.send('secret');
     });
 
+    // Check Auth
+    app.get('/auth-check', is_logged_in, account.check_auth);
+
     // Login
     app.post('/login', account.login );
 
@@ -22,6 +25,8 @@ function is_logged_in(req, res, next) {
         return next();
     }
 
-    console.log('redir!');
-    res.redirect('/');
+    console.log('Auth Failed!');
+    res.status(401);
+    res.send({error: 'authentication failed'})
+    // res.redirect('/auth-failed');
 }

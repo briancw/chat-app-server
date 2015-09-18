@@ -14,6 +14,7 @@ module.exports = function(passport) {
 
                 if (info) {
                     console.log(info);
+                    res.status(400);
                     res.send( info );
                     res.end();
                     return false;
@@ -54,6 +55,10 @@ module.exports = function(passport) {
                 }
 
             })(req, res);
+        },
+
+        check_auth: function(req, res) {
+            res.send( {success: true} );
         }
 
     };
